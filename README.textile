@@ -18,25 +18,25 @@ TODO:
   - perf
 
 <pre>
-	// #values, #distinct values, range min, range max
-	RNG rng(100, 50, 1, 100);
+// #values, #distinct values, range min, range max
+RNG rng(100, 50, 1, 100);
 
-	rng.generate();
+rng.generate();
 
-	for(size_t i = 0; i < rng.generated_values.size(); ++i)
-	{
-		printf("%d\n", rng.generated_values[i]);
-	}
+for(size_t i = 0; i < rng.generated_values.size(); ++i)
+{
+	printf("%d\n", rng.generated_values[i]);
+}
 </pre>
 
 Example Output of bin/main
 
 <pre>
-	.
-	. some values
-	.
-	#values: 100
-	#distinct values: 50
-	min value: 1
-	max value: 100
+.
+. some values
+.
+#values: 100
+#distinct values: 50
+min value: 1
+max value: 100
 </pre>
