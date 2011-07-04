@@ -103,19 +103,27 @@ void RNG::_distribute_distinct_values_once()
 
 void RNG::_distribute_remaining_values()
 {
-	typedef boost::uniform_int<> distribution_type;
+	typedef boost::normal_distribution<> distribution_type;
 	typedef boost::variate_generator<engine_type&, distribution_type> generator_type;
 	typedef boost::generator_iterator<generator_type> iterator_type;
-	
-	distribution_type dist(0, _nr_of_distinct_values - 1);
+
+	distribution_type dist(_nr_of_distinct_values / 2, _nr_of_distinct_values / 2);
 	generator_type generator(*_engine, dist);
 	iterator_type iterator(&generator);
+
+	int index;
 
 	for (size_t i = 0; i < _nr_of_values; ++i)
 	{
 		if (!_assigned_values[i])
 		{
-			generated_values[i] = _uvg->generated_values[*iterator++];
+			do
+			{
+				index = *iterator++;
+			}
+			while (index < 0 || index > _nr_of_distinct_values - 1);
+
+			generated_values[i] = _uvg->generated_values[index];
 		}
 	}
 }

@@ -15,9 +15,9 @@ int main(int argc, const char **argv)
 	{
 		printf("%d\n", rng.generated_values[i]);
 	}
-	
+
 	// check results
-	
+
 	printf("#values: %ld\n", rng.generated_values.size());
 	printf("#distinct values: %ld\n", _get_distinct_values(rng.generated_values).size());
 	printf("min value: %d\n", *min_element(rng.generated_values.begin(), rng.generated_values.end()));

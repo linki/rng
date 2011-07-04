@@ -13,7 +13,7 @@ parameters:
   - range
 
 TODO:
-  - distributions (boost::uniform_int atm)
+  - distributions (normal distribution atm)
   - iterators
   - perf
 
