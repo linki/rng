@@ -1,0 +1,42 @@
+h3. An easy to use random number generator with distributions
+
+i couldn't find a single easy to use random numbers generator in c, that lets you define min/max boundaries, number of distinct values and a distribution. so i started writing one based on boost's distribution classes.
+
+goals:
+  - simple api
+  - distributions
+  - correct
+
+parameters:
+  - num values
+  - num unique values
+  - range
+
+TODO:
+  - distributions (boost::uniform_int atm)
+  - iterators
+  - perf
+
+<pre>
+	// #values, #distinct values, range min, range max
+	RNG rng(100, 50, 1, 100);
+
+	rng.generate();
+
+	for(size_t i = 0; i < rng.generated_values.size(); ++i)
+	{
+		printf("%d\n", rng.generated_values[i]);
+	}
+</pre>
+
+Example Output of bin/main
+
+<pre>
+	.
+	. some values
+	.
+	#values: 100
+	#distinct values: 50
+	min value: 1
+	max value: 100
+</pre>
