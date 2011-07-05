@@ -29,19 +29,27 @@ void UVG::generate()
 		throw;
 	}
 	
-	typedef boost::uniform_int<> distribution_type;
+	typedef boost::normal_distribution<> distribution_type;
 	typedef boost::variate_generator<engine_type&, distribution_type> generator_type;
 	typedef boost::generator_iterator<generator_type> iterator_type;
 
-	distribution_type dist(_min_value, _max_value);
+	distribution_type dist(_min_value + (_max_value - _min_value / 2), _max_value - _min_value / 2);
 	generator_type generator(*_engine, dist);
 	iterator_type iterator(&generator);
 
 	std::set<int> values;
+	
+	int value;
 
 	while (values.size() < _nr_of_values)
 	{
-		values.insert(*iterator++);
+		do
+		{
+			value = *iterator++;
+		}
+		while (value < _min_value || value > _max_value);
+		
+		values.insert(value);
 	}
 
 	generated_values.assign(values.begin(), values.end());
