@@ -10,7 +10,7 @@ test: bin/test
 	bin/test
 
 bin/test: test/main.o src/rng.o
-	g++ -o bin/test test/main.o src/rng.o -lgtest -lgtest_main -Wall
+	g++ -o bin/test test/main.o src/rng.o -lgtest -lgtest_main -lpthread -Wall
 
 test/main.o: test/main.cpp
 	g++ -o test/main.o test/main.cpp -Iinclude -c -Wall

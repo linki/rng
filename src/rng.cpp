@@ -1,3 +1,4 @@
+#include <time.h>
 #include <vector>
 #include <set>
 #include <boost/random/mersenne_twister.hpp>
@@ -11,7 +12,7 @@ UVG::UVG(size_t nr_of_values, int min_value, int max_value) :
 	_nr_of_values(nr_of_values),
 	_min_value(min_value),
 	_max_value(max_value),
-	_engine(new boost::mt19937(std::time(0)))
+	_engine(new boost::mt19937(time(NULL)))
 {
 	// empty
 }
@@ -52,7 +53,7 @@ RNG::RNG(size_t nr_of_values, size_t nr_of_distinct_values, int min_value, int m
 	_min_value(min_value),
 	_max_value(max_value),
 	_uvg(new UVG(nr_of_distinct_values, min_value, max_value)),
-	_engine(new boost::mt19937(std::time(0)))
+	_engine(new boost::mt19937(time(NULL)))
 {
 	// empty
 }
@@ -121,7 +122,7 @@ void RNG::_distribute_remaining_values()
 			{
 				index = *iterator++;
 			}
-			while (index < 0 || index > _nr_of_distinct_values - 1);
+			while (index < 0 || index > (int) _nr_of_distinct_values - 1);
 
 			generated_values[i] = _uvg->generated_values[index];
 		}
