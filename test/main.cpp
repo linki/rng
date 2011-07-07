@@ -6,8 +6,8 @@ std::vector<int> _get_distinct_values(std::vector<int> values);
 
 TEST(RNG, Generate)
 {
-	RNG rng(100, 10, 1, 1000);
 	// #values, #distinct values, range min, range max
+	RNG rng(100, 10, 1, 1000);
 
 	rng.generate();
 
@@ -20,8 +20,8 @@ TEST(RNG, Generate)
 
 TEST(UVG, Generate)
 {
-	UVG uvg(10, 1, 100);
 	// 10 unique values in the range of 1 and 100 (inclusive)
+	UVG uvg(10, 1, 100);
 
 	uvg.generate();
 
