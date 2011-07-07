@@ -6,11 +6,11 @@ bin/main: src/main.o src/rng.o
 src/main.o: include/rng.h src/main.cpp
 	g++ -o src/main.o src/main.cpp -Iinclude -c -O3 -Wall
 
-test: bin/test
-	bin/test
+check: bin/check
+	bin/check
 
-bin/test: test/main.o src/rng.o
-	g++ -o bin/test test/main.o src/rng.o -lgtest -lgtest_main -lpthread -O3 -Wall
+bin/check: test/main.o src/rng.o
+	g++ -o bin/check test/main.o src/rng.o -lgtest -lgtest_main -lpthread -O3 -Wall
 
 test/main.o: include/rng.h test/main.cpp
 	g++ -o test/main.o test/main.cpp -Iinclude -c -O3 -Wall
