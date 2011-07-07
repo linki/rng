@@ -3,14 +3,14 @@
 
 class UVG // Unique Values Generator
 {
-	size_t _nr_of_values;
-	int _min_value;
-	int _max_value;
-
 	typedef boost::mt19937 engine_type;
 	engine_type *_engine;
 
 public:
+
+	size_t _nr_of_values;
+	int _min_value;
+	int _max_value;
 
 	std::vector<int> generated_values;
 
@@ -22,11 +22,6 @@ public:
 
 class RNG // Random Numbers Generator
 {
-	size_t _nr_of_values;
-	size_t _nr_of_distinct_values;
-	int _min_value;
-	int _max_value;
-
 	std::vector<bool> _assigned_values;
 
 	UVG *_uvg;
@@ -38,6 +33,11 @@ class RNG // Random Numbers Generator
 	void _distribute_remaining_values();	
 
 public:
+
+	size_t _nr_of_values;
+	size_t _nr_of_distinct_values;
+	int _min_value;
+	int _max_value;
 
 	std::vector<int> generated_values;
 

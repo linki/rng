@@ -8,7 +8,7 @@ TEST(RNG, Generate)
 {
 	// #values, #distinct values, range min, range max
 	RNG rng(100, 10, 1, 1000);
-
+	
 	rng.generate();
 
 	EXPECT_EQ(100, rng.generated_values.size());
@@ -16,11 +16,24 @@ TEST(RNG, Generate)
 
 	EXPECT_LE(1, *min_element(rng.generated_values.begin(), rng.generated_values.end()));
 	EXPECT_GE(1000, *max_element(rng.generated_values.begin(), rng.generated_values.end()));
+
+	rng._nr_of_values = 1000;
+	rng._nr_of_distinct_values = 100;
+	rng._min_value = 10;
+	rng._max_value = 5000;
+
+	rng.generate();
+
+	EXPECT_EQ(1000, rng.generated_values.size());
+	EXPECT_EQ( 100, _get_distinct_values(rng.generated_values).size());
+
+	EXPECT_LE(10, *min_element(rng.generated_values.begin(), rng.generated_values.end()));
+	EXPECT_GE(5000, *max_element(rng.generated_values.begin(), rng.generated_values.end()));
 }
 
 TEST(UVG, Generate)
 {
-	// 10 unique values in the range of 1 and 100 (inclusive)
+	// #distinct values, range min, range max
 	UVG uvg(10, 1, 100);
 
 	uvg.generate();
@@ -30,6 +43,18 @@ TEST(UVG, Generate)
 
 	EXPECT_LE(1, *min_element(uvg.generated_values.begin(), uvg.generated_values.end()));
 	EXPECT_GE(100, *max_element(uvg.generated_values.begin(), uvg.generated_values.end()));
+
+	uvg._nr_of_values = 100;
+	uvg._min_value = 10;
+	uvg._max_value = 1000;
+
+	uvg.generate();
+
+	EXPECT_EQ(100, uvg.generated_values.size());
+	EXPECT_EQ(100, _get_distinct_values(uvg.generated_values).size());
+
+	EXPECT_LE(10, *min_element(uvg.generated_values.begin(), uvg.generated_values.end()));
+	EXPECT_GE(1000, *max_element(uvg.generated_values.begin(), uvg.generated_values.end()));
 }
 
 // helper

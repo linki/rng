@@ -9,10 +9,10 @@
 #include "rng.h"
 
 UVG::UVG(size_t nr_of_values, int min_value, int max_value) :
+	_engine(new boost::mt19937(time(NULL))),
 	_nr_of_values(nr_of_values),
 	_min_value(min_value),
-	_max_value(max_value),
-	_engine(new boost::mt19937(time(NULL)))
+	_max_value(max_value)
 {
 	// empty
 }
@@ -56,12 +56,12 @@ void UVG::generate()
 }
 
 RNG::RNG(size_t nr_of_values, size_t nr_of_distinct_values, int min_value, int max_value) :
+	_uvg(new UVG(nr_of_distinct_values, min_value, max_value)),
+	_engine(new boost::mt19937(time(NULL))),
 	_nr_of_values(nr_of_values),
 	_nr_of_distinct_values(nr_of_distinct_values),
 	_min_value(min_value),
-	_max_value(max_value),
-	_uvg(new UVG(nr_of_distinct_values, min_value, max_value)),
-	_engine(new boost::mt19937(time(NULL)))
+	_max_value(max_value)
 {
 	// empty
 }
@@ -74,6 +74,10 @@ RNG::~RNG()
 
 void RNG::generate()
 {
+	_uvg->_nr_of_values = _nr_of_values;
+	_uvg->_min_value = _min_value;
+	_uvg->_max_value = _max_value;
+	
 	_uvg->generate();
 
 	generated_values.clear();
