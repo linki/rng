@@ -56,8 +56,8 @@ void UVG::generate()
 }
 
 RNG::RNG(size_t nr_of_values, size_t nr_of_distinct_values, int min_value, int max_value) :
-	_uvg(new UVG(nr_of_distinct_values, min_value, max_value)),
 	_engine(new boost::mt19937(time(NULL))),
+	_uvg(new UVG(nr_of_distinct_values, min_value, max_value)),
 	_nr_of_values(nr_of_values),
 	_nr_of_distinct_values(nr_of_distinct_values),
 	_min_value(min_value),
@@ -74,7 +74,7 @@ RNG::~RNG()
 
 void RNG::generate()
 {
-	_uvg->_nr_of_values = _nr_of_values;
+	_uvg->_nr_of_values = _nr_of_distinct_values;
 	_uvg->_min_value = _min_value;
 	_uvg->_max_value = _max_value;
 	
@@ -82,6 +82,9 @@ void RNG::generate()
 
 	generated_values.clear();
 	generated_values.resize(_nr_of_values);
+
+	_value_ids.clear();
+	_value_ids.resize(_nr_of_values);
 
 	_assigned_values.assign(_nr_of_values, 0);
 
@@ -110,6 +113,7 @@ void RNG::_distribute_distinct_values_once()
 		while (_assigned_values[index]);
 
 		generated_values[index] = _uvg->generated_values[i];
+		_value_ids[index] = i;
 		_assigned_values[index] = 1;
 	}
 }
@@ -137,6 +141,7 @@ void RNG::_distribute_remaining_values()
 			while (index < 0 || index > (int) _nr_of_distinct_values - 1);
 
 			generated_values[i] = _uvg->generated_values[index];
+			_value_ids[i] = index;
 		}
 	}
 }

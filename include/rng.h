@@ -24,8 +24,6 @@ class RNG // Random Numbers Generator
 {
 	std::vector<bool> _assigned_values;
 
-	UVG *_uvg;
-
 	typedef boost::mt19937 engine_type;
 	engine_type *_engine;
 	
@@ -34,12 +32,16 @@ class RNG // Random Numbers Generator
 
 public:
 
+	UVG *_uvg;
+
 	size_t _nr_of_values;
 	size_t _nr_of_distinct_values;
 	int _min_value;
 	int _max_value;
 
 	std::vector<int> generated_values;
+	
+	std::vector<int> _value_ids;
 
 	RNG(size_t nr_of_values, size_t nr_of_distinct_values, int min_value, int max_value);
 	virtual ~RNG();
