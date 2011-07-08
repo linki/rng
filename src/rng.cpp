@@ -74,7 +74,7 @@ RNG::~RNG()
 
 void RNG::generate()
 {
-	_uvg->_nr_of_values = _nr_of_values;
+	_uvg->_nr_of_values = _nr_of_distinct_values;
 	_uvg->_min_value = _min_value;
 	_uvg->_max_value = _max_value;
 	
